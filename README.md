@@ -24,7 +24,7 @@
 
 ### Задание 1
 
-####Jenkins Freestyle
+### Jenkins Freestyle
 
 ![Скриншот_сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
 ![Скриншот_настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
@@ -35,7 +35,7 @@
 
 ### Задание 2
 
-####Jenkins Pipeline
+### Jenkins Pipeline
 
 ![Скриншот_сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
 ![Скриншот_настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img4.png)
