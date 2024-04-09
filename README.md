@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`GIT`" - `Никифоров Роман`
+# Домашнее задание к занятию "`CI\CD`" - `Никифоров Роман`
 
 
 ### Инструкция по выполнению домашнего задания
@@ -25,7 +25,8 @@
 ### Задание 1
 
 ```
-https://github.com/thrsnknwldgthtsntpwr/task-1/commit/63024cb157cad5a51c26b1d51cf66ab8183b122d
+![Скриншот сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
+![Скриншот настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
 
 ```
 
