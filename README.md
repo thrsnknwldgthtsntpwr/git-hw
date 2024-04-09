@@ -47,3 +47,5 @@
 ### Upload to Nexus
 ![Скриншот_сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img5.png)
 ![Скриншот_настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img6.png)
+![Скриншот содержимого репозитория Nexus](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img7.png)
+
