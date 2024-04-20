@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`CI\CD`" - `Никифоров Роман`
+# Домашнее задание к занятию "`ZABBIX ч. 1`" - `Никифоров Роман`
 
 
 ### Инструкция по выполнению домашнего задания
@@ -24,10 +24,10 @@
 
 ### Задание 1
 
-### Jenkins Freestyle
+### Zabbix Server с веб-интерфейсом
 
-![Скриншот_сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
-![Скриншот_настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
+![Админка Заббикс](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
+![команды](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
 
 
 
@@ -35,17 +35,17 @@
 
 ### Задание 2
 
-### Jenkins Pipeline
+### Zabbix Agent на два хоста
 
-![Скриншот_сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
-![Скриншот_настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img4.png)
+![Configuration > Hosts](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
+![zabbix agent log](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img4.png)
+![Monitoring latest data](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img5.png)
+![команды](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img6.png)
 
 ---
 
 ### Задание 3
 
-### Upload to Nexus
-![Скриншот_сборки](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img5.png)
-![Скриншот_настроек проекта](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img6.png)
-![Скриншот содержимого репозитория Nexus](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img7.png)
+### Zabbix Agent на Windows хосте
+![latest_data_free_space](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img7.png)
 
