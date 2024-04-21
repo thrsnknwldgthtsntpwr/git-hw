@@ -24,28 +24,23 @@
 
 ### Задание 1
 
-### Zabbix Server с веб-интерфейсом
 
-![Админка Заббикс](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
-![команды](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
-
-
+![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
 
 ---
 
 ### Задание 2
+Результат данного задания сдавайте вместе с заданием 3
 
-### Zabbix Agent на два хоста
-
-![Configuration > Hosts](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
-![zabbix agent log](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img4.png)
-![Monitoring latest data](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img5.png)
-![команды](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img6.png)
 
 ---
 
 ### Задание 3
 
-### Zabbix Agent на Windows хосте
-![latest_data_free_space](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img7.png)
+![шаблоны](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
 
+---
+
+### Задание 4
+
+![дашборд](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
