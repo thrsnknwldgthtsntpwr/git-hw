@@ -36,7 +36,7 @@
 ![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
 Скрипт проверки 80-ого порта и наличия файла /var/www/html/index.html
 
-\```
+```
 #!/bin/sh
 RESULT=1
 nc -z localhost 80
@@ -50,12 +50,13 @@ then
 else
  exit 1
 fi
-\```
+```
 
 keepalived.conf
 
 
-\```
+```
+
 vrrp_script check_www {
         script       "/etc/keepalived/check.sh"
         interval 3   # check every 2 seconds
@@ -77,7 +78,8 @@ vrrp_instance VI_1 {
                 check_www
         }
 }
-\```
+
+```
 
 Демонстрация работы (80-ый порт открыт/закрыт)
 
