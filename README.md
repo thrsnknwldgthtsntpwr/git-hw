@@ -24,23 +24,64 @@
 
 ### Задание 1
 
+Настройка HSRP
 
 ![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
 
 ---
 
 ### Задание 2
-Результат данного задания сдавайте вместе с заданием 3
 
+Плавающий IP на eth0 (Keepalived)
+![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
+Скрипт проверки 80-ого порта и наличия файла /var/www/html/index.html
+
+\```
+#!/bin/sh
+RESULT=1
+nc -z localhost 80
+a=$?
+test -f /var/www/html/index.html
+b=$?
+
+if [ $a -eq 0 ] && [ $b -eq 0 ]
+then
+ exit 0
+else
+ exit 1
+fi
+\```
+
+keepalived.conf
+
+
+\```
+vrrp_script check_www {
+        script       "/etc/keepalived/check.sh"
+        interval 3   # check every 2 seconds
+        fall 1       # require 2 failures for KO
+        rise 1       # require 2 successes for OK
+}
+
+vrrp_instance VI_1 {
+        state MASTER
+        interface eth0
+        virtual_router_id 65
+        priority 255
+        advert_int 1
+
+        virtual_ipaddress {
+              192.168.129.65/24
+        }
+        track_script {
+                check_www
+        }
+}
+\```
+
+Демонстрация работы (80-ый порт открыт/закрыт)
+
+![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
 
 ---
 
-### Задание 3
-
-![шаблоны](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
-
----
-
-### Задание 4
-
-![дашборд](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
