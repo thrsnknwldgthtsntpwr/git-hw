@@ -9,10 +9,10 @@
 Round-robin, HAProxy на 4-ом уровне OSI
 
 Скрин работы
-![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img1.png)
+![Items](img/img-1.png)
 
 Статистика HAProxy
-![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img2.png)
+![Items](img/img-2.png)
 
 Конфигурационный файл haproxy
 ```
@@ -72,7 +72,7 @@ listen web_tcp
 ### Задание 2
 
 Балансировка HAProxy на L7, вес 20/20/60
-![Items](https://github.com/thrsnknwldgthtsntpwr/git-hw/blob/main/img/img3.png)
+![Items](img/img-3.png)
 
 Конфигурационный файл HAProxy
 ```
