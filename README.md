@@ -9,12 +9,15 @@
 Round-robin, HAProxy на 4-ом уровне OSI
 
 Скрин работы
+
 ![Items](img/img-1.png)
 
 Статистика HAProxy
+
 ![Items](img/img-2.png)
 
 Конфигурационный файл haproxy
+
 ```
 global
         log /dev/log    local0
