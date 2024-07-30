@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`SQL ч.1`" - `Никифоров Роман`
+# Домашнее задание к занятию "`SQL ч.2`" - `Никифоров Роман`
 
 [Руководство по оформлению Markdown файлов](https://gist.github.com/Jekins/2bf2d0638163f1294637#Code)
 
@@ -6,10 +6,22 @@
 
 ### Задание 1 
 
-Получите уникальные названия районов из таблицы с адресами, которые начинаются на “K” и заканчиваются на “a” и не содержат пробелов.
+Одним запросом получите информацию о магазине, в котором обслуживается более 300 покупателей, и выведите в результат следующую информацию:
+
+    фамилия и имя сотрудника из этого магазина;
+    город нахождения магазина;
+    количество пользователей, закреплённых в этом магазине.
+
 
 ```
-SELECT DISTINCT district FROM address WHERE district LIKE 'K%' AND district LIKE '%a' AND district NOT LIKE "% %";
+SELECT CONCAT(s2.first_name, ' ', s2.last_name) AS 'Name staff', c2.city AS City, COUNT(customer_id) AS 'Total customer'
+FROM customer c
+JOIN store s ON s.store_id =c.store_id
+JOIN staff s2 ON s2.store_id = s.store_id 
+JOIN address a ON a.address_id = s2.address_id
+JOIN city c2 ON c2.city_id  = a.city_id
+GROUP BY s.store_id, c2.city_id, s2.first_name, s2.last_name
+HAVING COUNT(customer_id) > 300;
 
 ```
 
@@ -17,12 +29,13 @@ SELECT DISTINCT district FROM address WHERE district LIKE 'K%' AND district LIKE
 
 ### Задание 2
 
-Получите из таблицы платежей за прокат фильмов информацию по платежам, которые выполнялись в промежуток с 15 июня 2005 года по 18 июня 2005 года включительно и стоимость которых превышает 10.00.
+Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
 
 ```
 
-SELECT * FROM payment WHERE DATE(payment_date) BETWEEN '2005-06-15' AND '2005-06-18' AND amount > 10.00;
-
+SELECT COUNT(film_id) AS 'Total Films'
+FROM film
+WHERE `length` > (SELECT AVG(`length`)  FROM film);
 
 ```
 
@@ -30,32 +43,15 @@ SELECT * FROM payment WHERE DATE(payment_date) BETWEEN '2005-06-15' AND '2005-06
 
 ### Задание 3
 
-Получите последние пять аренд фильмов.
+Получите информацию, за какой месяц была получена наибольшая сумма платежей, и добавьте информацию по количеству аренд за этот месяц.
 
 ```
 
-SELECT * FROM rental ORDER BY return_date DESC LIMIT 5;
-
-```
-
----
-
-### Задание 4
-
-Одним запросом получите активных покупателей, имена которых Kelly или Willie.
-
-Сформируйте вывод в результат таким образом:
-
-    - все буквы в фамилии и имени из верхнего регистра переведите в нижний регистр,-
-    - замените буквы 'll' в именах на 'pp'.
-
-```
-
-SELECT customer_id, REPLACE(LOWER(first_name), 'll', 'pp') FROM customer WHERE active = 1 AND first_name IN ('Kelly','Willie');
+SELECT DATE_FORMAT(payment_date, "%M %Y"), COUNT(rental_id), SUM(amount)
+FROM payment p
+GROUP BY DATE_FORMAT(payment_date, "%M %Y")
+ORDER BY SUM(amount) DESC LIMIT 1;
 
 ```
 
 ---
-
-
-
