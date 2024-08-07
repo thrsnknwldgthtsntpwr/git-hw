@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`Индексы`" - `Никифоров Роман`
+# Домашнее задание к занятию "`Уязвимости и атаки на информационные системы`" - `Никифоров Роман`
 
 [Руководство по оформлению Markdown файлов](https://gist.github.com/Jekins/2bf2d0638163f1294637#Code)
 
@@ -6,66 +6,73 @@
 
 ### Задание 1 
 
-Напишите запрос к учебной базе данных, который вернёт процентное отношение общего размера всех индексов к общему размеру всех таблиц.
+
+Скачайте и установите виртуальную машину Metasploitable: https://sourceforge.net/projects/metasploitable/.
+
+Это типовая ОС для экспериментов в области информационной безопасности, с которой следует начать при анализе уязвимостей.
+
+Просканируйте эту виртуальную машину, используя nmap.
+
+Попробуйте найти уязвимости, которым подвержена эта виртуальная машина.
+
+Сами уязвимости можно поискать на сайте https://www.exploit-db.com/.
+
+Для этого нужно в поиске ввести название сетевой службы, обнаруженной на атакуемой машине, и выбрать подходящие по версии уязвимости.
+
+Ответьте на следующие вопросы:
+
+    Какие сетевые службы в ней разрешены?
+    Какие уязвимости были вами обнаружены? (список со ссылками: достаточно трёх уязвимостей)
+
+Приведите ответ в свободной форме.
+
+Разрешенные сетевые службы
 
 ```
-select sum(index_length) / SUM(data_length + index_length) * 100 result
-from information_schema.TABLES
-where table_schema = 'sakila';
-
+21/tcp   open  ftp         vsftpd 2.3.4
+22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+23/tcp   open  telnet      Linux telnetd
+25/tcp   open  smtp        Postfix smtpd
+53/tcp   open  domain      ISC BIND 9.4.2
+80/tcp   open  http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)
+111/tcp  open  rpcbind     2 (RPC #100000)
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+512/tcp  open  exec        netkit-rsh rexecd
+513/tcp  open  login       OpenBSD or Solaris rlogind
+514/tcp  open  tcpwrapped
+1099/tcp open  java-rmi    GNU Classpath grmiregistry
+1524/tcp open  bindshell   Metasploitable root shell
+2049/tcp open  nfs         2-4 (RPC #100003)
+2121/tcp open  ftp         ProFTPD 1.3.1
+3306/tcp open  mysql       MySQL 5.0.51a-3ubuntu5
+5432/tcp open  postgresql  PostgreSQL DB 8.3.0 - 8.3.7
+5900/tcp open  vnc         VNC (protocol 3.3)
+6000/tcp open  X11         (access denied)
+6667/tcp open  irc         UnrealIRCd
+8009/tcp open  ajp13       Apache Jserv (Protocol v1.3)
+8180/tcp open  http        Apache Tomcat/Coyote JSP engine 1.1
 ```
 
----
+Обнаруженные уязвимости
+- vsftpd - CVE-2011-2523
+- OpenSSH - CVE-2018-15473, CVE-2016-10010, CVE-2016-10009
+- telnetd - CVE-2011-4862
 
 ### Задание 2
 
-Выполните explain analyze следующего запроса:
+Проведите сканирование Metasploitable в режимах SYN, FIN, Xmas, UDP.
 
-```
+Запишите сеансы сканирования в Wireshark.
 
-select distinct concat(c.last_name, ' ', c.first_name), sum(p.amount) over (partition by c.customer_id, f.title)
-from payment p, rental r, customer c, inventory i, film f
-where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and r.customer_id = c.customer_id and i.inventory_id = r.inventory_id
+Ответьте на следующие вопросы:
 
-```
+ - Чем отличаются эти режимы сканирования с точки зрения сетевого трафика?
+ - Как отвечает сервер?
 
--перечислите узкие места;
--оптимизируйте запрос: внесите корректировки по использованию операторов, при необходимости добавьте индексы.
+Приведите ответ в свободной форме.
 
-
-explain analyze "до вмешательства":
-
-```
--> Table scan on <temporary>  (cost=2.5..2.5 rows=0) (actual time=5656..5656 rows=391 loops=1)
-    -> Temporary table with deduplication  (cost=0..0 rows=0) (actual time=5656..5656 rows=391 loops=1)
-        -> Window aggregate with buffering: sum(payment.amount) OVER (PARTITION BY c.customer_id,f.title )   (actual time=2383..5457 rows=642000 loops=1)
-            -> Sort: c.customer_id, f.title  (actual time=2383..2442 rows=642000 loops=1)
-                -> Stream results  (cost=22.1e+6 rows=16.3e+6) (actual time=0.553..1741 rows=642000 loops=1)
-                    -> Nested loop inner join  (cost=22.1e+6 rows=16.3e+6) (actual time=0.547..1485 rows=642000 loops=1)
-                        -> Nested loop inner join  (cost=20.5e+6 rows=16.3e+6) (actual time=0.542..1305 rows=642000 loops=1)
-                            -> Nested loop inner join  (cost=18.8e+6 rows=16.3e+6) (actual time=0.535..1083 rows=642000 loops=1)
-                                -> Inner hash join (no condition)  (cost=1.61e+6 rows=16.1e+6) (actual time=0.52..42 rows=634000 loops=1)
-                                    -> Filter: (cast(p.payment_date as date) = '2005-07-30')  (cost=1.68 rows=16086) (actual time=0.0443..7.38 rows=634 loops=1)
-                                        -> Table scan on p  (cost=1.68 rows=16086) (actual time=0.0306..5.39 rows=16044 loops=1)
-                                    -> Hash
-                                        -> Covering index scan on f using idx_title  (cost=112 rows=1000) (actual time=0.045..0.373 rows=1000 loops=1)
-                                -> Covering index lookup on r using rental_date (rental_date=p.payment_date)  (cost=0.969 rows=1.01) (actual time=0.00107..0.0015 rows=1.01 loops=634000)
-                            -> Single-row index lookup on c using PRIMARY (customer_id=r.customer_id)  (cost=250e-6 rows=1) (actual time=185e-6..209e-6 rows=1 loops=642000)
-                        -> Single-row covering index lookup on i using PRIMARY (inventory_id=r.inventory_id)  (cost=250e-6 rows=1) (actual time=119e-6..143e-6 rows=1 loops=642000)
-
-```
-Узкое место большой объем данных, как следствие долгое выполнение запроса - 6 с небольшим секунд. Часто в службах зависимых от бд выполняемый больше 3 секунд запрос к БД уже "триггерит" как slow query - в связи с чем оптимизация тут кажется необходима.
-
-    Добавим индексы idx_payment_date
-    Customer и inventory достаем с помощью join
-    f.title and film f не нужны больше
-    переписан фильтр p.payment_date >= '2005-07-30' and p.payment_date < date_add('2005-07-30', interval 1 day);
-
-```
-select distinct concat (c.last_name, ' ', c.first_name), sum(p.amount) over (partition by c.customer_id)
-from payment p
-join rental r on p.payment_date = r.rental_date
-join customer c on r.customer_id = c.customer_id
-join inventory i on r.inventory_id = i.inventory_id
-where p.payment_date >= '2005-07-30' and p.payment_date < date_add('2005-07-30', interval 1 day);
-```
+В режиме SYN-сканирования сервер отвечает RST в случае, если порт открыт и RST ACK если порт закрыт
+В режиме FIN-сканирования сервер отвечает RST ACK в случае, если порт закрыт и ничего не отвечает в том случае, если порт открыт
+В режиме Xmas-сканирования сервер ничего не отвечает в случае, если порт открыт и присылает RST ACK если порт закрыт
+В режиме UDP-сканирования сервер отвечает ICMP-кодом в случае, если порт закрыт и, если порт открыт, то либо что-то отвечает либо ничего не отвечает.
