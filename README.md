@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`Защита хоста`" - `Никифоров Роман`
+# Домашнее задание к занятию "`Docker`" - `Никифоров Роман`
 
 [Руководство по оформлению Markdown файлов](https://gist.github.com/Jekins/2bf2d0638163f1294637#Code)
 
@@ -16,7 +16,7 @@
 - скачайте образ nginx:1.21.1;
 - Создайте Dockerfile и реализуйте в нем замену дефолтной индекс-страницы(/usr/share/nginx/html/index.html), на файл index.html с содержимым:
 
-\```
+```
 <html>
 <head>
 Hey, Netology
@@ -25,7 +25,7 @@ Hey, Netology
 <h1>I will be DevOps Engineer!</h1>
 </body>
 </html>
-\```
+```
 
 Соберите и отправьте созданный образ в свой dockerhub-репозитории c tag 1.0.0 (ТОЛЬКО ЕСЛИ ЕСТЬ ДОСТУП).
 Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
@@ -90,7 +90,7 @@ https://hub.docker.com/r/thrsnknwldgthtsntpwr/custom-nginx/tags
 
 1) Создайте отдельную директорию(например /tmp/netology/docker/task5) и 2 файла внутри него. "compose.yaml" с содержимым:
 
-\```
+```
 version: "3"
 services:
   portainer:
@@ -98,11 +98,11 @@ services:
     image: portainer/portainer-ce:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-\```
+```
 
 "docker-compose.yaml" с содержимым:
 
-\```
+```
 version: "3"
 services:
   registry:
@@ -110,7 +110,7 @@ services:
 
     ports:
     - "5000:5000"
-\```
+```
 
 И выполните команду "docker compose up -d". Какой из файлов был запущен и почему? (подсказка: https://docs.docker.com/compose/compose-application-model/#the-compose-file )
 
@@ -119,7 +119,7 @@ services:
 4) Откройте страницу "https://127.0.0.1:9000" и произведите начальную настройку portainer.(логин и пароль адмнистратора)
 5) Откройте страницу "http://127.0.0.1:9000/#!/home", выберите ваше local окружение. Перейдите на вкладку "stacks" и в "web editor" задеплойте следующий компоуз:
 
-\```
+```
 version: '3'
 
 services:
@@ -127,7 +127,7 @@ services:
     image: 127.0.0.1:5000/custom-nginx
     ports:
       - "9090:80"
-\```
+```
 
 6) Перейдите на страницу "http://127.0.0.1:9000/#!/2/docker/containers", выберите контейнер с nginx и нажмите на кнопку "inspect". В представлении <> Tree разверните поле "Config" и сделайте скриншот от поля "AppArmorProfile" до "Driver".
 7) Удалите любой из манифестов компоуза(например compose.yaml). Выполните команду "docker compose up -d". Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
